@@ -80,7 +80,7 @@ app.get('/form', (req, res) => {
 });
 
 // Django 예시
-<!-- {% csrf_token %} -->
+<!-- `{% csrf_token %}` -->
 ```
 
 ## 🟡 보안 헤더
