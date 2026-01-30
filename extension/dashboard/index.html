@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebGuard QA Dashboard</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="logo">
+        <h1>🛡️ WebGuard QA</h1>
+        <p>통합 보안 테스트 대시보드</p>
+      </div>
+      
+      <nav class="nav-menu">
+        <button class="nav-item active" data-page="overview">
+          📊 개요
+        </button>
+        <button class="nav-item" data-page="history">
+          📜 스캔 히스토리
+        </button>
+        <button class="nav-item" data-page="vulnerabilities">
+          🔍 취약점 분석
+        </button>
+        <button class="nav-item" data-page="reports">
+          📄 리포트
+        </button>
+        <button class="nav-item" data-page="settings">
+          ⚙️ 설정
+        </button>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <p>버전 1.0.0</p>
+        <button id="exportAllBtn" class="btn-small">전체 데이터 내보내기</button>
+      </div>
+    </aside>
+    
+    <main class="main-content">
+      <header class="dashboard-header">
+        <div class="header-title">
+          <h2 id="pageTitle">개요</h2>
+          <p id="pageSubtitle">전체 보안 상태를 확인하세요</p>
+        </div>
+        <div class="header-actions">
+          <button id="refreshBtn" class="btn-icon" title="데이터 새로고침">🔄</button>
+          <button id="clearDataBtn" class="btn-icon" title="선택한 데이터 삭제">🗑️</button>
+        </div>
+      </header>
+      
+      <!-- 개요 페이지 -->
+      <section id="overview-page" class="page-content active">
+        <div class="stats-grid">
+          <div class="stat-card" data-severity="critical">
+            <div class="stat-icon critical">⚠️</div>
+            <div class="stat-info">
+              <div class="stat-value" id="criticalCount">0</div>
+              <div class="stat-label">심각</div>
+            </div>
+          </div>
+          
+          <div class="stat-card" data-severity="high">
+            <div class="stat-icon high">🔴</div>
+            <div class="stat-info">
+              <div class="stat-value" id="highCount">0</div>
+              <div class="stat-label">높음</div>
+            </div>
+          </div>
+          
+          <div class="stat-card" data-severity="medium">
+            <div class="stat-icon medium">🟡</div>
+            <div class="stat-info">
+              <div class="stat-value" id="mediumCount">0</div>
+              <div class="stat-label">보통</div>
+            </div>
+          </div>
+          
+          <div class="stat-card" data-severity="low">
+            <div class="stat-icon low">🔵</div>
+            <div class="stat-info">
+              <div class="stat-value" id="lowCount">0</div>
+              <div class="stat-label">낮음</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="chart-section">
+          <div class="chart-card">
+            <h3>최근 스캔 트렌드</h3>
+            <canvas id="trendChart"></canvas>
+          </div>
+          
+          <div class="chart-card">
+            <h3>취약점 분포</h3>
+            <canvas id="distributionChart"></canvas>
+          </div>
+        </div>
+        
+        <div class="recent-scans">
+          <h3>최근 스캔</h3>
+          <div id="recentScansContainer" class="scans-list">
+            <p class="placeholder">스캔 기록이 없습니다.</p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- 히스토리 페이지 -->
+      <section id="history-page" class="page-content">
+        <div class="filter-bar">
+          <input type="text" id="searchInput" placeholder="URL 또는 제목 검색...">
+          <select id="severityFilter">
+            <option value="all">모든 심각도</option>
+            <option value="critical">심각</option>
+            <option value="high">높음</option>
+            <option value="medium">보통</option>
+            <option value="low">낮음</option>
+          </select>
+        </div>
+        
+        <div id="historyContainer" class="history-list">
+          <p class="placeholder">스캔 기록이 없습니다.</p>
+        </div>
+      </section>
+      
+      <!-- 취약점 분석 페이지 -->
+      <section id="vulnerabilities-page" class="page-content">
+        <div class="vulnerability-summary">
+          <h3>취약점 요약</h3>
+          <div id="vulnerabilitySummary" class="vulnerability-cards">
+            <p class="placeholder">데이터를 로딩 중...</p>
+          </div>
+        </div>
+        
+        <div class="vulnerability-details">
+          <h3>상세 내역</h3>
+          <div id="vulnerabilityDetails" class="details-list">
+            <p class="placeholder">분석할 데이터가 없습니다.</p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- 리포트 페이지 -->
+      <section id="reports-page" class="page-content">
+        <div class="report-generator">
+          <h3>리포트 생성</h3>
+          <div class="report-options">
+            <label>
+              <input type="checkbox" id="includeCritical" checked> 심각 문제
+            </label>
+            <label>
+              <input type="checkbox" id="includeHigh" checked> 높은 문제
+            </label>
+            <label>
+              <input type="checkbox" id="includeMedium"> 보통 문제
+            </label>
+            <label>
+              <input type="checkbox" id="includeLow"> 낮은 문제
+            </label>
+          </div>
+          
+          <div class="date-range">
+            <label>시작일: <input type="date" id="startDate"></label>
+            <label>종료일: <input type="date" id="endDate"></label>
+          </div>
+          
+          <button id="generateReportBtn" class="btn-primary">리포트 생성</button>
+        </div>
+        
+        <div id="reportPreview" class="report-preview">
+          <p class="placeholder">리포트를 생성하려면 옵션을 선택하고 버튼을 클릭하세요.</p>
+        </div>
+      </section>
+      
+      <!-- 설정 페이지 -->
+      <section id="settings-page" class="page-content">
+        <div class="settings-group">
+          <h3>일반 설정</h3>
+          <label class="setting-item">
+            <span>자동 스캔</span>
+            <input type="checkbox" id="autoScanToggle">
+          </label>
+          <label class="setting-item">
+            <span>알림 활성화</span>
+            <input type="checkbox" id="notificationsToggle">
+          </label>
+        </div>
+        
+        <div class="settings-group">
+          <h3>스캔 옵션</h3>
+          <label class="setting-item">
+            <span>XSS 검사</span>
+            <input type="checkbox" id="xssToggle" checked>
+          </label>
+          <label class="setting-item">
+            <span>CSRF 검사</span>
+            <input type="checkbox" id="csrfToggle" checked>
+          </label>
+          <label class="setting-item">
+            <span>보안 헤더 검사</span>
+            <input type="checkbox" id="headersToggle" checked>
+          </label>
+          <label class="setting-item">
+            <span>민감 정보 검사</span>
+            <input type="checkbox" id="sensitiveDataToggle" checked>
+          </label>
+        </div>
+        
+        <div class="settings-group">
+          <h3>데이터 관리</h3>
+          <button id="clearHistoryBtn" class="btn-danger">스캔 히스토리 삭제</button>
+          <button id="resetSettingsBtn" class="btn-secondary">설정 초기화</button>
+        </div>
+      </section>
+    </main>
+  </div>
+  
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

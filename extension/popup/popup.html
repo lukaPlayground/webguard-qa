@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebGuard QA</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🛡️ WebGuard QA</h1>
+      <p class="subtitle">웹 보안 & 자동화 테스트</p>
+    </header>
+
+    <div class="current-url">
+      <label>현재 페이지:</label>
+      <div id="currentUrl" class="url-display">로딩 중...</div>
+    </div>
+
+    <section class="scan-section">
+      <h2>보안 스캔</h2>
+      <div class="button-group">
+        <button id="quickScanBtn" class="btn btn-primary">빠른 스캔</button>
+        <button id="deepScanBtn" class="btn btn-secondary">심층 스캔</button>
+      </div>
+      <div class="scan-options">
+        <label>
+          <input type="checkbox" id="xssCheck" checked>
+          XSS 취약점
+        </label>
+        <label>
+          <input type="checkbox" id="csrfCheck" checked>
+          CSRF 토큰
+        </label>
+        <label>
+          <input type="checkbox" id="headersCheck" checked>
+          보안 헤더
+        </label>
+        <label>
+          <input type="checkbox" id="sensitiveDataCheck" checked>
+          민감 정보 노출
+        </label>
+      </div>
+    </section>
+
+    <section class="test-section">
+      <h2>자동화 테스트</h2>
+      <div class="button-group">
+        <button id="formTestBtn" class="btn btn-primary">폼 테스트</button>
+        <button id="linkTestBtn" class="btn btn-secondary">링크 검증</button>
+      </div>
+    </section>
+
+    <section class="results-section">
+      <h2>스캔 결과</h2>
+      <div id="scanStatus" class="status-idle">대기 중</div>
+      <div id="resultsContainer" class="results-container">
+        <p class="placeholder">스캔을 시작하려면 버튼을 클릭하세요.</p>
+      </div>
+    </section>
+
+    <footer>
+      <button id="openDashboardBtn" class="btn btn-link">📊 대시보드 열기</button>
+      <button id="exportBtn" class="btn btn-link">📥 결과 내보내기</button>
+      <button id="helpBtn" class="btn btn-link">❓ 도움말</button>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

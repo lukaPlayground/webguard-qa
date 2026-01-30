@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "WebGuard QA",
+  "version": "1.0.0",
+  "description": "통합 웹 보안 스캐너 및 자동화 테스트 도구",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "scripting",
+    "contextMenus",
+    "notifications",
+    "downloads"
+  ],
+  "background": {
+    "service_worker": "background/service-worker.js"
+  },
+  "action": {
+    "default_popup": "popup/popup.html"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["dashboard/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

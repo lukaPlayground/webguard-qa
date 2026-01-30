@@ -1,0 +1,28 @@
+{
+  "name": "webguard-qa",
+  "version": "1.0.0",
+  "description": "통합 웹 보안 스캐너 및 자동화 테스트 시스템",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js",
+    "test": "echo \"테스트 준비 중...\" && exit 0"
+  },
+  "keywords": [
+    "security",
+    "testing",
+    "qa",
+    "automation",
+    "chrome-extension"
+  ],
+  "author": "루까 (Luka)",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "sqlite3": "^5.1.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

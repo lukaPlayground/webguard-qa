@@ -1,0 +1,19 @@
+web-guard-qa/
+├── extension/              # Chrome Extension
+│   ├── manifest.json
+│   ├── popup/
+│   ├── content/
+│   ├── background/
+│   └── assets/
+├── backend/               # Node.js Backend
+│   ├── server.js
+│   ├── routes/
+│   ├── scanners/
+│   └── database/
+├── dashboard/            # Web Dashboard
+│   ├── index.html
+│   ├── css/
+│   ├── js/
+│   └── assets/
+├── docs/                 # Documentation
+└── tests/               # Test suites

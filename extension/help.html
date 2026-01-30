@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebGuard QA - 도움말</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      color: #667eea;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #666;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      color: #333;
+      font-size: 24px;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #667eea;
+      padding-bottom: 10px;
+    }
+
+    h3 {
+      color: #555;
+      font-size: 18px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    ul, ol {
+      margin-left: 20px;
+      margin-bottom: 15px;
+    }
+
+    li {
+      color: #666;
+      line-height: 1.8;
+      margin-bottom: 8px;
+    }
+
+    .feature-box {
+      background: #f9f9f9;
+      border-left: 4px solid #667eea;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+
+    .feature-box h3 {
+      margin-top: 0;
+      color: #667eea;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .comparison-table th {
+      background: #f5f5f5;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .comparison-table td {
+      color: #666;
+    }
+
+    .check {
+      color: #4caf50;
+      font-weight: bold;
+    }
+
+    .cross {
+      color: #999;
+    }
+
+    .tip {
+      background: #fff9c4;
+      border-left: 4px solid #fbc02d;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+
+    .tip strong {
+      color: #f57c00;
+    }
+
+    .back-btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #667eea;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      margin-top: 30px;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: #5568d3;
+      transform: translateY(-2px);
+    }
+
+    .severity-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      margin: 0 4px;
+    }
+
+    .severity-critical {
+      background: #ffebee;
+      color: #d32f2f;
+    }
+
+    .severity-high {
+      background: #fff3e0;
+      color: #f57c00;
+    }
+
+    .severity-medium {
+      background: #fff9c4;
+      color: #f9a825;
+    }
+
+    .severity-low {
+      background: #e3f2fd;
+      color: #1976d2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🛡️ WebGuard QA 도움말</h1>
+    <p class="subtitle">통합 웹 보안 스캐너 및 자동화 테스트 사용 가이드</p>
+
+    <h2>📋 스캔 유형</h2>
+
+    <div class="feature-box">
+      <h3>⚡ 빠른 스캔 (Quick Scan)</h3>
+      <p><strong>목적:</strong> 주요 보안 문제를 빠르게 파악</p>
+      <p><strong>소요 시간:</strong> 1-3초</p>
+      <p><strong>검사 항목:</strong></p>
+      <ul>
+        <li>XSS 취약점 (인라인 이벤트, eval() 사용 등)</li>
+        <li>CSRF 토큰 검증</li>
+        <li>보안 헤더 (CSP, X-Frame-Options)</li>
+        <li>민감 정보 노출 (API 키, 이메일 등)</li>
+      </ul>
+      <p><strong>권장 사용:</strong> 개발 중 수시 체크, 일상적인 보안 확인</p>
+    </div>
+
+    <div class="feature-box">
+      <h3>🔬 심층 스캔 (Deep Scan)</h3>
+      <p><strong>목적:</strong> 모든 보안 문제를 철저히 분석</p>
+      <p><strong>소요 시간:</strong> 3-10초 (페이지 복잡도에 따라)</p>
+      <p><strong>검사 항목:</strong></p>
+      <ul>
+        <li>빠른 스캔의 모든 항목 +</li>
+        <li>DOM 보안 분석 (HTTP 스크립트 로딩)</li>
+        <li>JavaScript 보안 분석 (console.log 남용)</li>
+        <li>쿠키 분석 (HttpOnly, Secure 플래그)</li>
+      </ul>
+      <p><strong>권장 사용:</strong> 프로덕션 배포 전, 보안 감사, 상세 리포트 필요 시</p>
+    </div>
+
+    <h2>📊 비교표</h2>
+
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>검사 항목</th>
+          <th>빠른 스캔</th>
+          <th>심층 스캔</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>XSS 취약점</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+        </tr>
+        <tr>
+          <td>CSRF 검사</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+        </tr>
+        <tr>
+          <td>보안 헤더</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+        </tr>
+        <tr>
+          <td>민감 정보</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+        </tr>
+        <tr>
+          <td>DOM 보안</td>
+          <td class="cross">-</td>
+          <td class="check">✓</td>
+        </tr>
+        <tr>
+          <td>JS 보안</td>
+          <td class="cross">-</td>
+          <td class="check">✓</td>
+        </tr>
+        <tr>
+          <td>쿠키 분석</td>
+          <td class="cross">-</td>
+          <td class="check">✓</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>🎯 심각도 분류</h2>
+
+    <p>발견된 문제는 다음과 같이 분류됩니다:</p>
+
+    <ul>
+      <li>
+        <span class="severity-badge severity-critical">심각 (Critical)</span>
+        즉각적인 보안 위협 - 즉시 수정 필요
+      </li>
+      <li>
+        <span class="severity-badge severity-high">높음 (High)</span>
+        심각한 보안 문제 - 우선 수정 권장
+      </li>
+      <li>
+        <span class="severity-badge severity-medium">보통 (Medium)</span>
+        잠재적 보안 위험 - 수정 권장
+      </li>
+      <li>
+        <span class="severity-badge severity-low">낮음 (Low)</span>
+        경미한 보안 개선 사항 - 시간 날 때 수정
+      </li>
+    </ul>
+
+    <h2>🔧 주요 기능</h2>
+
+    <h3>1. 폼 테스트</h3>
+    <p>페이지의 모든 폼을 분석하여 입력 필드, 필수 항목, 유효성 검사를 확인합니다.</p>
+
+    <h3>2. 링크 검증</h3>
+    <p>깨진 링크, HTTP 링크, 외부 링크를 자동으로 탐지합니다.</p>
+
+    <h3>3. 결과 내보내기</h3>
+    <p>스캔 결과를 JSON 형식으로 저장하여 팀과 공유하거나 문서화할 수 있습니다.</p>
+
+    <h3>4. 대시보드</h3>
+    <p>모든 스캔 히스토리를 한눈에 확인하고, 취약점 트렌드를 분석할 수 있습니다.</p>
+
+    <div class="tip">
+      <strong>💡 사용 팁:</strong> 개발 중에는 <strong>빠른 스캔</strong>으로 자주 체크하고, 
+      배포 전에는 <strong>심층 스캔</strong>으로 꼼꼼히 확인하세요!
+    </div>
+
+    <h2>⚙️ 스캔 옵션</h2>
+
+    <p>팝업에서 각 검사를 선택적으로 활성화/비활성화할 수 있습니다:</p>
+
+    <ul>
+      <li><strong>XSS 취약점:</strong> Cross-Site Scripting 공격 가능성 검사</li>
+      <li><strong>CSRF 토큰:</strong> Cross-Site Request Forgery 방어 확인</li>
+      <li><strong>보안 헤더:</strong> CSP, X-Frame-Options 등 보안 헤더 검증</li>
+      <li><strong>민감 정보 노출:</strong> API 키, 토큰, 이메일 노출 확인</li>
+    </ul>
+
+    <h2>🚀 워크플로우 예시</h2>
+
+    <h3>개발 단계</h3>
+    <ol>
+      <li>로컬 개발 서버 실행</li>
+      <li>기능 구현 후 <strong>빠른 스캔</strong> 실행</li>
+      <li>발견된 문제 수정</li>
+      <li>재스캔으로 검증</li>
+    </ol>
+
+    <h3>배포 전 검증</h3>
+    <ol>
+      <li>스테이징 환경 접속</li>
+      <li><strong>심층 스캔</strong> 실행</li>
+      <li>대시보드에서 전체 분석</li>
+      <li>리포트 생성 및 팀 공유</li>
+      <li>모든 문제 수정 후 배포</li>
+    </ol>
+
+    <h2>❓ 문제 해결</h2>
+
+    <h3>스캔이 작동하지 않는 경우</h3>
+    <ul>
+      <li>페이지를 새로고침하고 다시 시도</li>
+      <li>확장 프로그램을 다시 로드</li>
+      <li>브라우저 콘솔(F12)에서 에러 확인</li>
+    </ul>
+
+    <h3>결과가 표시되지 않는 경우</h3>
+    <ul>
+      <li>Chrome Storage 권한 확인</li>
+      <li>대시보드 새로고침</li>
+      <li>데이터 삭제 후 재스캔</li>
+    </ul>
+
+    <a href="#" onclick="window.close()" class="back-btn">← 돌아가기</a>
+  </div>
+</body>
+</html>
